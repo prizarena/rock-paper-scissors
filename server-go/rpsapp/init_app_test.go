@@ -9,6 +9,6 @@ func TestInitApp(t *testing.T) {
 				t.Error("panic expected")
 			}
 		}()
-		InitApp(nil, nil)
+		InitApp(nil)
 	})
 }

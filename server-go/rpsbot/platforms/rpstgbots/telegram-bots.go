@@ -1,8 +1,8 @@
-package tgbots
+package rpstgbots
 
 import (
 	"github.com/strongo/app"
-	"github.com/strongo-games/bidding-tictactoe/server-go/btttbot-secrets"
+	"github.com/strongo-games/rock-paper-scissors/server-go/rpssecrets"
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"context"
@@ -11,7 +11,7 @@ import (
 
 var botsBy bots.SettingsBy
 
-const BotProfile = "BiddingTicTacToe"
+const BotProfile = "RockPaperScissors"
 
 func Bots(c context.Context, env strongo.Environment, router bots.WebhooksRouter) bots.SettingsBy {
 	if len(botsBy.ByCode) == 0 {
@@ -23,15 +23,15 @@ func Bots(c context.Context, env strongo.Environment, router bots.WebhooksRouter
 		case strongo.EnvProduction:
 			botsBy = bots.NewBotSettingsBy(routerByProfile,
 				telegram.NewTelegramBot(strongo.EnvProduction, BotProfile,
-					btttbot_secrets.TelegramProdBot, btttbot_secrets.TelegramProdToken,
-					"", "", btttbot_secrets.GaTrackingID, strongo.LocaleEnUS),
+					rpssecrets.TelegramProdBot, rpssecrets.TelegramProdToken,
+					"", "", rpssecrets.GaTrackingID, strongo.LocaleEnUS),
 			)
-		case strongo.EnvLocal:
-			botsBy = bots.NewBotSettingsBy(routerByProfile,
-				telegram.NewTelegramBot(strongo.EnvLocal, BotProfile,
-					btttbot_secrets.TelegramLocalBot, btttbot_secrets.TelegramLocalToken,
-					"", "", "", strongo.LocaleEnUS),
-			)
+		//case strongo.EnvLocal:
+		//	botsBy = bots.NewBotSettingsBy(routerByProfile,
+		//		telegram.NewTelegramBot(strongo.EnvLocal, BotProfile,
+		//			rpssecrets.TelegramLocalBot, rpssecrets.TelegramLocalToken,
+		//			"", "", "", strongo.LocaleEnUS),
+		//	)
 		default:
 			log.Errorf(c, "Unknown environment: %v=%v", env, strongo.EnvironmentNames[env])
 		}
