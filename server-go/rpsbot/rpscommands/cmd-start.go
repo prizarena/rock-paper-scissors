@@ -7,6 +7,7 @@ import (
 
 var startCommand = bots.Command{
 	Code: "start",
+	Commands: []string{"/start"},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
 		m.Text = "Rock - Paper - Scissors"
 		inlineQuery := ""

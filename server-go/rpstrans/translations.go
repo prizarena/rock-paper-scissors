@@ -58,7 +58,6 @@ Please make your choice.
 
 <b>Sponsored:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtsTrackerBot</a>  - track your debts`,
 		"ru-RU": `<b>Камень-Ножницы-Бумага</b>
-
 <pre>
   💎 Камень побеждает ✂.
 
