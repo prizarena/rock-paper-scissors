@@ -1,6 +1,18 @@
 package rpstrans
 
 const (
+	NewGameInlineTitle = "NewGameInlineTitle"
+	NewGameInlineDescription = "NewGameInlineDescription"
+	NewGameText = "NewGameText"
+
+	Option1text = "Option1text"
+	Option2text = "Option2text"
+	Option3text = "Option3text"
+
+	Option1code = "Option1code"
+	Option2code = "Option2code"
+	Option3code = "Option3code"
+
 	MT_WELCOME                      = "MT_WELCOME"
 	MT_HOW_TO_START_NEW_GAME        = "MT_HOW_TO_START_NEW_GAME"
 	MT_GAME_NAME                    = "MT_GAME_NAME"

@@ -13,14 +13,67 @@ var TRANS = map[string]map[string]string{
 		"en-US": "<b>Please select your language</b>\nПожалуйста выберите язык общения",
 		"ru-RU": "<b>Пожалуйста выберите язык общения</b>\nPlease select your language",
 	},
+	Option1code: {
+		"en-US": "rock",
+		"ru-RU": "rock",
+	},
+	Option1text: {
+		"en-US": "💎 Rock",
+		"ru-RU": "💎 Камень",
+	},
+	Option2code: {
+		"en-US": "paper",
+		"ru-RU": "scissors",
+	},
+	Option2text: {
+		"en-US": "📄 Paper",
+		"ru-RU": "✂ Ножницы",
+	},
+	Option3code: {
+		"en-US": "scissors",
+		"ru-RU": "paper",
+	},
+	Option3text: {
+		"en-US": "✂ Scissors",
+		"ru-RU": "📄 Бумага",
+	},
+	NewGameInlineTitle: {
+		"en-US": "💎📄✂ New game",
+		"ru-RU": "💎✂📄 Новая игра",
+	},
+	NewGameInlineDescription: {
+		"en-US": "Starts new Rock-Paper-Scissors game",
+		"ru-RU": "Создаст новую игру в Камень-Ножницы-Бумагу",
+	},
+	NewGameText: {
+		"en-US": `<b>Rock-Paper-Scissors</b>
+<pre>
+  💎 Rock wins ✂.
+
+  📄 Paper wins (cover) 💎.
+
+  ✂ Scissors win (cut) 📄.
+</pre>
+Please make your choice.
+
+<b>Sponsored:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtsTrackerBot</a>  - track your debts`,
+		"ru-RU": `<b>Камень-Ножницы-Бумага</b>
+
+<pre>
+  💎 Камень побеждает ✂.
+
+  ✂ Ножницы побеждают 📄.
+
+  📄 Бумага побеждает 💎.
+</pre>
+Сделайте ваш выбор.
+
+<b>Промо:</b> <a href="https://t.me/DebtsTrackerRuBot?start=ref-playRockPaperScissorsBot">Бот для учёта долгов</a>`,
+	},
 	MT_WELCOME: {
-		"en-US": `<b>Bidding Tic-Tac-Toe</b>
-Welcome!
-You can use this bot to play <a href="https://biddingtictactoe.com/#rules">Bidding Tic-Tac-Toe</a> with your friends right in a Telegram chat.`,
+		"en-US": ``,
 		//
-		"ru-RU": `<b>Крестики-нолики с аукционом</b>
-Приветствуем!
-Этот бот позволяет играть в <a href="https://biddingtictactoe.com/ru#rules">аукционные крестики-нолики</a> с вашими друзьями прямо в Телеграмм-чате.`,
+		"ru-RU": ``,
 	},
 	MT_HOW_TO_START_NEW_GAME: {
 		"en-US": `<b>To begin new game:</b>

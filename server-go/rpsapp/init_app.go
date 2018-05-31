@@ -5,18 +5,14 @@ import (
 	"github.com/strongo-games/rock-paper-scissors/server-go/rpsbot"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	"github.com/strongo-games/rock-paper-scissors/server-go/rpsdal/rpsgaedal"
 )
 
 func InitApp(botHost bots.BotHost) {
+	rpsgaedal.RegisterDal()
+
 	httpRouter := httprouter.New()
 	http.Handle("/", httpRouter)
-
-	httpRouter.GET("/test1", func(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-		writer.Write([]byte("test response 1"))
-	})
-	httpRouter.GET("/test2", func(writer http.ResponseWriter, request *http.Request, params httprouter.Params) {
-		writer.Write([]byte("test response 2"))
-	})
 
 	rpsbot.InitBot(httpRouter, botHost, rpsAppContext{})
 }

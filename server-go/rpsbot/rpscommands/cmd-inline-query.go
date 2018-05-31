@@ -4,55 +4,51 @@ import (
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"github.com/strongo/bots-api-telegram"
-)
+	"github.com/strongo-games/rock-paper-scissors/server-go/rpstrans"
+	"github.com/strongo/app"
+	)
 
 var inlineQueryCommand = bots.NewInlineQueryCommand(
 	"inline-query",
 	func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
 		inlineQueryID := whc.Input().(telegram.TgWebhookInlineQuery).GetInlineQueryID()
+		c := whc.Context()
 
-		inlineResult := func(id, title, desc string) tgbotapi.InlineQueryResultArticle {
+		translator := whc.BotAppContext().GetTranslator(c)
+		newGameOption := func(lang string) tgbotapi.InlineQueryResultArticle {
+			t := strongo.NewSingleMapTranslator(strongo.LocalesByCode5[lang], translator)
+			callbackData := func(optionID string ) string {
+				return "bet?on=" + t.Translate(optionID)
+			}
 			return tgbotapi.InlineQueryResultArticle{
-				ID:          id,
+				ID:          "new-game_"+lang,
 				Type:        "article",
-				Title:       title,
-				Description: desc,
+				Title:       t.Translate(rpstrans.NewGameInlineTitle),
+				Description: t.Translate(rpstrans.NewGameInlineDescription),
 				InputMessageContent: tgbotapi.InputTextMessageContent{
-					Text:                  `<b>Rock-Paper-Scissors</b>
-
-Please make your choice.
-
-<code>Rules</code>:
-<pre>
-  💎 Rock wins over scissors ✂.
-
-  📄 Paper wins over rock 💎.
-
-  ✂ Scissors win over paper 📄.
-</pre>
-<b>Sponsored:</b> <a href="https://t.me/playRockPaperScissorsBot?start=place-ad">Your ad could be here.</a>`,
+					Text:                  t.Translate(rpstrans.NewGameText),
 					ParseMode:             "HTML",
 					DisableWebPagePreview: true,
 				},
 				ReplyMarkup: tgbotapi.NewInlineKeyboardMarkup(
 					[]tgbotapi.InlineKeyboardButton{
-						{Text: "💎 Rock", CallbackData: "rock"},
+						{Text: t.Translate(rpstrans.Option1text), CallbackData: callbackData(rpstrans.Option1code)},
 					},
 					[]tgbotapi.InlineKeyboardButton{
-						{Text: "📄 Paper", CallbackData: "paper"},
+						{Text: t.Translate(rpstrans.Option2text), CallbackData: callbackData(rpstrans.Option2code)},
 					},
 					[]tgbotapi.InlineKeyboardButton{
-						{Text: "✂ Scissors", CallbackData: "scissors"},
+						{Text: t.Translate(rpstrans.Option3text), CallbackData: callbackData(rpstrans.Option3code)},
 					},
 				),
 			}
 		}
+
 		m.BotMessage = telegram.InlineBotMessage(tgbotapi.InlineConfig{
 			InlineQueryID: inlineQueryID,
 			Results: []interface{}{
-				inlineResult("new-game", "💎📄✂ New game ", "Starts new Rock-Paper-Scissors game"),
-				//inlineResult("paper", "📄 Paper", "Wins over rock 💎"),
-				//inlineResult("scissors", "✂ Scissors", "Wins over paper 📄"),
+				newGameOption("en-US"),
+				newGameOption("ru-RU"),
 			},
 		})
 		return
