@@ -13,6 +13,10 @@ var TRANS = map[string]map[string]string{
 		"en-US": "<b>Please select your language</b>\nПожалуйста выберите язык общения",
 		"ru-RU": "<b>Пожалуйста выберите язык общения</b>\nPlease select your language",
 	},
+	ChallengeFriendCommandText: {
+		"en-US": "⚔️ Challenge Telegram friend",
+		"ru-RU": "⚔️ Новая игра в Telegram",
+	},
 	Option1code: {
 		"en-US": "rock",
 		"ru-RU": "rock",
@@ -20,6 +24,10 @@ var TRANS = map[string]map[string]string{
 	Option1text: {
 		"en-US": "💎 Rock",
 		"ru-RU": "💎 Камень",
+	},
+	Option1emoji: {
+		"en-US": "💎",
+		"ru-RU": "💎",
 	},
 	Option2code: {
 		"en-US": "paper",
@@ -29,9 +37,17 @@ var TRANS = map[string]map[string]string{
 		"en-US": "📄 Paper",
 		"ru-RU": "✂ Ножницы",
 	},
+	Option2emoji: {
+		"en-US": "📄",
+		"ru-RU": "✂",
+	},
 	Option3code: {
 		"en-US": "scissors",
 		"ru-RU": "paper",
+	},
+	Option3emoji: {
+		"en-US": "✂",
+		"ru-RU": "📄",
 	},
 	Option3text: {
 		"en-US": "✂ Scissors",

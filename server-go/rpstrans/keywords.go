@@ -9,9 +9,15 @@ const (
 	AskToMakeNextMove = "AskToMakeNextMove"
 	FirstMoveDoneAwaitingSecond = "FirstMoveDoneAwaitingSecond"
 
+	ChallengeFriendCommandText = "ChallengeFriendCommandText"
+
 	Option1text = "Option1text"
 	Option2text = "Option2text"
 	Option3text = "Option3text"
+
+	Option1emoji = "Option1emoji"
+	Option2emoji = "Option2emoji"
+	Option3emoji = "Option3emoji"
 
 	Option1code = "Option1code"
 	Option2code = "Option2code"

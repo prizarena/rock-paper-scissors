@@ -18,7 +18,7 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 		translator := whc.BotAppContext().GetTranslator(c)
 		newGameOption := func(lang string) tgbotapi.InlineQueryResultArticle {
 			t := strongo.NewSingleMapTranslator(strongo.LocalesByCode5[lang], translator)
-			m, err := renderGameMessage(whc, t, "", 1, rpsmodels.RpsGame{}, rpsmodels.User{})
+			m, err := renderGameMessage(whc, t, lang, "", 1, rpsmodels.RpsGame{}, rpsmodels.User{})
 			if  err != nil {
 				panic(err)
 			}
