@@ -45,6 +45,22 @@ var TRANS = map[string]map[string]string{
 		"en-US": "Starts new Rock-Paper-Scissors game",
 		"ru-RU": "Создаст новую игру в Камень-Ножницы-Бумагу",
 	},
+	GameCardTitle: {
+		"en-US": "<b>💎Rock-📄Paper-✂Scissors</b>",
+		"ru-RU": "<b>💎Камень-✂Ножницы-📄Бумага</b>",
+	},
+	FirstMoveDoneAwaitingSecond: {
+		"en-US": "Player <b>%v</b> made choice, awaiting another player...",
+		"ru-RU": "Игрок <b>%v</b> сделал свой ход, ожидается ход второго игрока...",
+	},
+	AskToMakeMove: {
+		"en-US": "Please make your choice.",
+		"ru-RU": "Сделайте ваш выбор.",
+	},
+	AskToMakeNextMove: {
+		"en-US": "Please make your next choice.",
+		"ru-RU": "Сделайте ваш следующий выбор.",
+	},
 	NewGameText: {
 		"en-US": `<b>Rock-Paper-Scissors</b>
 <pre>
@@ -54,7 +70,7 @@ var TRANS = map[string]map[string]string{
 
   ✂ Scissors win (cut) 📄.
 </pre>
-Please make your choice.
+
 
 <b>Sponsored:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtsTrackerBot</a>  - track your debts`,
 		"ru-RU": `<b>Камень-Ножницы-Бумага</b>

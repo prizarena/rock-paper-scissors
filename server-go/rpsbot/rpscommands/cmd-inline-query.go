@@ -6,7 +6,8 @@ import (
 	"github.com/strongo/bots-api-telegram"
 	"github.com/strongo-games/rock-paper-scissors/server-go/rpstrans"
 	"github.com/strongo/app"
-	)
+	"github.com/strongo-games/rock-paper-scissors/server-go/rpsmodels"
+)
 
 var inlineQueryCommand = bots.NewInlineQueryCommand(
 	"inline-query",
@@ -17,8 +18,9 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 		translator := whc.BotAppContext().GetTranslator(c)
 		newGameOption := func(lang string) tgbotapi.InlineQueryResultArticle {
 			t := strongo.NewSingleMapTranslator(strongo.LocalesByCode5[lang], translator)
-			callbackData := func(optionID string ) string {
-				return "bet?on=" + t.Translate(optionID)
+			m, err := renderGameMessage(whc, t, "", 1, rpsmodels.RpsGame{}, rpsmodels.User{})
+			if  err != nil {
+				panic(err)
 			}
 			return tgbotapi.InlineQueryResultArticle{
 				ID:          "new-game_"+lang,
@@ -26,21 +28,11 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 				Title:       t.Translate(rpstrans.NewGameInlineTitle),
 				Description: t.Translate(rpstrans.NewGameInlineDescription),
 				InputMessageContent: tgbotapi.InputTextMessageContent{
-					Text:                  t.Translate(rpstrans.NewGameText),
+					Text:                  m.Text,
 					ParseMode:             "HTML",
-					DisableWebPagePreview: true,
+					DisableWebPagePreview: m.DisableWebPagePreview,
 				},
-				ReplyMarkup: tgbotapi.NewInlineKeyboardMarkup(
-					[]tgbotapi.InlineKeyboardButton{
-						{Text: t.Translate(rpstrans.Option1text), CallbackData: callbackData(rpstrans.Option1code)},
-					},
-					[]tgbotapi.InlineKeyboardButton{
-						{Text: t.Translate(rpstrans.Option2text), CallbackData: callbackData(rpstrans.Option2code)},
-					},
-					[]tgbotapi.InlineKeyboardButton{
-						{Text: t.Translate(rpstrans.Option3text), CallbackData: callbackData(rpstrans.Option3code)},
-					},
-				),
+				ReplyMarkup: m.Keyboard.(*tgbotapi.InlineKeyboardMarkup),
 			}
 		}
 

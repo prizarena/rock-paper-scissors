@@ -1,9 +1,13 @@
 package rpstrans
 
 const (
+	GameCardTitle = "GameCardTitle"
 	NewGameInlineTitle = "NewGameInlineTitle"
 	NewGameInlineDescription = "NewGameInlineDescription"
 	NewGameText = "NewGameText"
+	AskToMakeMove = "AskToMakeMove"
+	AskToMakeNextMove = "AskToMakeNextMove"
+	FirstMoveDoneAwaitingSecond = "FirstMoveDoneAwaitingSecond"
 
 	Option1text = "Option1text"
 	Option2text = "Option2text"
