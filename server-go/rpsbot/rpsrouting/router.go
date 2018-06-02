@@ -1,9 +1,9 @@
 package rpsrouting
 
 import (
-	"github.com/strongo-games/bidding-tictactoe/server-go/btttbot/commands"
+	"github.com/prizarena/bidding-tictactoe/server-go/btttbot/commands"
 	"github.com/strongo/bots-framework/core"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpsbot/rpscommands"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpsbot/rpscommands"
 )
 
 var WebhooksRouter = bots.NewWebhookRouter(

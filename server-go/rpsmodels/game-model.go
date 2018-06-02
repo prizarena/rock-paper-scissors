@@ -2,7 +2,7 @@ package rpsmodels
 
 import (
 	"github.com/strongo/db"
-	"github.com/strongo-games/arena/canvas"
+	"github.com/prizarena/arena/canvas"
 )
 
 const RpsGameKind = "G"

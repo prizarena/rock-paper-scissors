@@ -4,12 +4,12 @@ import (
 	"context"
 	"github.com/pkg/errors"
 	"github.com/strongo/app"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpsmodels"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpsmodels"
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"reflect"
 	"time"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpstrans"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 )
 
 type rpsAppContext struct {

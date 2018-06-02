@@ -2,7 +2,7 @@ package rpstgbots
 
 import (
 	"github.com/strongo/app"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpssecrets"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpssecrets"
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"context"

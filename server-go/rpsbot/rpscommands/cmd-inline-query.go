@@ -4,9 +4,9 @@ import (
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"github.com/strongo/bots-api-telegram"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpstrans"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 	"github.com/strongo/app"
-	"github.com/strongo-games/rock-paper-scissors/server-go/rpsmodels"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpsmodels"
 )
 
 var inlineQueryCommand = bots.NewInlineQueryCommand(
