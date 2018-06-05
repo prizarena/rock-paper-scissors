@@ -2,7 +2,7 @@ package rpsmodels
 
 import (
 	"github.com/strongo/db"
-	"github.com/prizarena/arena/canvas"
+	"github.com/prizarena/turn-based"
 )
 
 const RpsGameKind = "G"
@@ -16,7 +16,7 @@ var _ db.EntityHolder = (*RpsGame)(nil)
 
 type RpsGameEntity struct {
 	BoardID string `datastore:",noindex,omitempty"`
-	canvas.BoardEntity
+	turnbased.BoardEntity
 }
 
 func (RpsGame) Kind() string {

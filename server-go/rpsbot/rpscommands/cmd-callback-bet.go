@@ -6,7 +6,7 @@ import (
 	"github.com/prizarena/rock-paper-scissors/server-go/rpsdal"
 	"context"
 	"github.com/strongo/db"
-	"github.com/prizarena/arena/canvas"
+	"github.com/prizarena/turn-based"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpsmodels"
 	"github.com/strongo/log"
 	"github.com/pkg/errors"
@@ -39,12 +39,12 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		userID := whc.AppUserStrID()
 
 		var rpsGame rpsmodels.RpsGame
-		var board canvas.Board
+		var board turnbased.Board
 
 		if err = rpsdal.DB.RunInTransaction(c, func(tc context.Context) (err error) {
-			board, err = canvas.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, move)
+			board, err = turnbased.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, move)
 			if err != nil {
-				if err == canvas.ErrOldRound || err == canvas.ErrUnknownRound {
+				if err == turnbased.ErrOldRound || err == turnbased.ErrUnknownRound {
 					log.Warningf(c, "%v: %v", err, round)
 					err = nil
 					return
@@ -64,7 +64,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 						log.Errorf(c, "Failed to create RpsGame entity: %v", err)
 					}
 				}()
-				canvas.NextRound(board)
+				turnbased.NextRound(board)
 			}
 			if err = rpsdal.DB.Update(tc, &board); err != nil {
 				return
