@@ -12,6 +12,9 @@ import (
 	"github.com/pkg/errors"
 	"time"
 	"strconv"
+	"github.com/prizarena/prizarena-public/prizarena-client-go"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpssecrets"
+	"github.com/prizarena/prizarena-public/prizarena-interfaces"
 )
 
 var betCallbackCommand = bots.NewCallbackCommand(
@@ -73,6 +76,16 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		}, db.SingleGroupTransaction); err != nil {
 			return
 		}
+
+		httpClient := whc.BotContext().BotHost.GetHTTPClient(c)
+		prizarenaApiClient := prizarena.NewHttpApiClient(httpClient, "", rpssecrets.RpsPrizarenaToken)
+		prizarenaApiClient.PlayCompleted(c, prizarena_interfaces.PlayCompletedEvent{
+			PlayID: "",
+			TournamentID: "", // empty for monthly tournament
+			Impacts: []prizarena_interfaces.Impact{
+				{UserID: userID, Points: 1},
+			},
+		})
 
 		var appUser bots.BotAppUser
 		appUser, err = whc.GetAppUser()
