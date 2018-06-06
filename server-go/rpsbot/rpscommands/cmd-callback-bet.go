@@ -86,17 +86,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 				{UserID: userID, Points: 1},
 			},
 		})
-
-		var appUser bots.BotAppUser
-		appUser, err = whc.GetAppUser()
-		if err != nil {
-			return
-		}
-		user := rpsmodels.User{
-			IntegerID:  db.NewIntID(whc.AppUserIntID()),
-			UserEntity: appUser.(*rpsmodels.UserEntity),
-		}
-		if m, err = renderGameMessage(whc, whc, lang, boardID, board.Round, rpsGame, user); err != nil {
+		if m, err = renderGameMessage(whc, whc, board); err != nil {
 			return
 		}
 		return

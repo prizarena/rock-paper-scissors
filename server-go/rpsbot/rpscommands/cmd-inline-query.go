@@ -6,7 +6,7 @@ import (
 	"github.com/strongo/bots-api-telegram"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 	"github.com/strongo/app"
-	"github.com/prizarena/rock-paper-scissors/server-go/rpsmodels"
+	"github.com/prizarena/turn-based"
 )
 
 var inlineQueryCommand = bots.NewInlineQueryCommand(
@@ -18,7 +18,7 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 		translator := whc.BotAppContext().GetTranslator(c)
 		newGameOption := func(lang string) tgbotapi.InlineQueryResultArticle {
 			t := strongo.NewSingleMapTranslator(strongo.LocalesByCode5[lang], translator)
-			m, err := renderGameMessage(whc, t, lang, "", 1, rpsmodels.RpsGame{}, rpsmodels.User{})
+			m, err := renderGameMessage(whc, t, turnbased.Board{BoardEntity: &turnbased.BoardEntity{Lang: lang}})
 			if  err != nil {
 				panic(err)
 			}

@@ -3,7 +3,6 @@ package rpscommands
 import (
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/app"
-	"github.com/prizarena/rock-paper-scissors/server-go/rpsmodels"
 	"bytes"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 	"fmt"
@@ -11,25 +10,30 @@ import (
 	"strconv"
 	"net/url"
 	"github.com/strongo/bots-api-telegram"
+	"github.com/prizarena/turn-based"
 )
 
-func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator, lang, boardID string, round int, game rpsmodels.RpsGame, user rpsmodels.User) (m bots.MessageFromBot, err error) {
+func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator, board turnbased.Board) (m bots.MessageFromBot, err error) {
 	m.IsEdit = true
 	m.Format = bots.MessageFormatHTML
 	var s bytes.Buffer
 	s.WriteString(whc.Translate(rpstrans.GameCardTitle))
 	s.WriteString("\n")
-	if game.RpsGameEntity == nil {
-		game.RpsGameEntity = &rpsmodels.RpsGameEntity{}
+	if board.BoardEntity == nil {
+		board.BoardEntity = &turnbased.BoardEntity{Round: 1}
 	}
-	userMoves := game.UserMoves.Strings()
+	userMoves := board.UserMoves.Strings()
 	movesCount := len(userMoves)
 	switch {
 	case movesCount == 0: // not started
 		s.WriteString(whc.Translate(rpstrans.AskToMakeMove))
 	case movesCount == 1 || userMoves[0] == "" || userMoves[1] == "": // one player made move, waiting for second player
 		s.WriteString("\n\n")
-		s.WriteString(t.Translate(rpstrans.FirstMoveDoneAwaitingSecond, user.ID))
+		firstPlayerName := board.UserNames[0]
+		if firstPlayerName == "" {
+			firstPlayerName = "Player #1"
+		}
+		s.WriteString(t.Translate(rpstrans.FirstMoveDoneAwaitingSecond, firstPlayerName))
 	case movesCount == 2: // game completed
 		s.WriteString("\n\n")
 		s.WriteString(fmt.Sprintf("Game completed, moves: %v v %v", userMoves[0], userMoves[1]))
@@ -40,9 +44,9 @@ func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator
 	}
 	s.WriteString(fmt.Sprintf("\n\nLast updated: %v", time.Now()))
 	m.Text = s.String()
-	callbackPrefix := fmt.Sprintf("bet?l=%v&r=%v&", lang, strconv.Itoa(round))
-	if boardID != "" {
-		callbackPrefix += "b=" + url.QueryEscape(boardID) + "&"
+	callbackPrefix := fmt.Sprintf("bet?l=%v&r=%v&", board.Lang, strconv.Itoa(board.Round))
+	if board.ID != "" {
+		callbackPrefix += "b=" + url.QueryEscape(board.ID) + "&"
 	}
 
 	inlineQuery := ""
@@ -63,6 +67,15 @@ func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator
 			},
 		},
 	)
+
+	if board.ID != "" && (board.BoardEntity == nil || board.LeftTournament.IsZero()) {
+		keyboard.InlineKeyboard = append(keyboard.InlineKeyboard, []tgbotapi.InlineKeyboardButton{
+			{
+				Text:         "🚫 Leave tournament",
+				CallbackData: fmt.Sprintf("%v?board=%v", turnbased.LeaveTournamentCommandCode, board.ID),
+			},
+		})
+	}
 
 	m.Keyboard = keyboard
 	return

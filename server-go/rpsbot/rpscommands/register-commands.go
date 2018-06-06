@@ -1,6 +1,8 @@
 package rpscommands
 
-import "github.com/strongo/bots-framework/core"
+import (
+	"github.com/strongo/bots-framework/core"
+)
 
 func RegisterRpsCommands(router bots.WebhooksRouter) {
 	router.RegisterCommands([]bots.Command{
@@ -8,5 +10,6 @@ func RegisterRpsCommands(router bots.WebhooksRouter) {
 		inlineQueryCommand,
 		chosenInlineResultCommand,
 		betCallbackCommand,
+		leaveTournamentCommand,
 	})
 }
