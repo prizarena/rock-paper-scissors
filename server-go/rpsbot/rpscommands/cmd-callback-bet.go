@@ -79,7 +79,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 
 		httpClient := whc.BotContext().BotHost.GetHTTPClient(c)
 		prizarenaApiClient := prizarena.NewHttpApiClient(httpClient, "", "rock-paper-scissors", rpssecrets.RpsPrizarenaToken)
-		prizarenaApiClient.PlayCompleted(c, prizarena_interfaces.PlayCompletedEvent{
+		prizarenaApiClient.PlayCompleted(c, prizarena_interfaces.PlayCompletedPayload{
 			PlayID: "",
 			TournamentID: "", // empty for monthly tournament
 			Impacts: []prizarena_interfaces.Impact{
