@@ -49,7 +49,6 @@ var betCallbackCommand = bots.NewCallbackCommand(
 
 		userID := whc.AppUserStrID()
 
-		var rpsGame rpsmodels.RpsGame
 		var board turnbased.Board
 
 		var appUser bots.BotAppUser
@@ -66,19 +65,8 @@ var betCallbackCommand = bots.NewCallbackCommand(
 				}
 				return
 			}
-			rpsGame = rpsmodels.RpsGame{
-				RpsGameEntity: &rpsmodels.RpsGameEntity{
-					BoardID:     boardID,
-					BoardEntity: *board.BoardEntity,
-				},
-			}
 			userMoves := board.UserMoves.Strings()
 			if len(userMoves) == 2 && userMoves[0] != "" && userMoves[1] != "" {
-				go func() {
-					if err := rpsdal.DB.InsertWithRandomIntID(c, &rpsGame); err != nil {
-						log.Errorf(c, "Failed to create RpsGame entity: %v", err)
-					}
-				}()
 				turnbased.NextRound(board)
 			}
 			if err = rpsdal.DB.Update(tc, &board); err != nil {
