@@ -4,17 +4,17 @@ import (
 	"context"
 	"github.com/julienschmidt/httprouter"
 	"github.com/strongo/app"
-	"github.com/prizarena/bidding-tictactoe/server-go/btttbot-secrets"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpsbot/platforms/rpstgbots"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpsbot/rpsrouting"
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-framework/platforms/telegram"
 	"net/http"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpssecrets"
 )
 
 func InitBot(httpRouter *httprouter.Router, botHost bots.BotHost, appContext bots.BotAppContext) error {
 	gaSettings := bots.AnalyticsSettings{
-		GaTrackingID: btttbot_secrets.GaTrackingID,
+		GaTrackingID: rpssecrets.GaTrackingID,
 		Enabled: func(r *http.Request) bool {
 			return false
 		},

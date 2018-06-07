@@ -17,6 +17,16 @@ import (
 	"github.com/prizarena/prizarena-public/prizarena-interfaces"
 )
 
+func getBoardID(whc bots.WebhookContext, boardID string) (string, error) {
+	if boardID == "" {
+		boardID = whc.Input().(bots.WebhookCallbackQuery).GetInlineMessageID()
+		if boardID == "" {
+			return "", errors.New("expecting to get inlineMessageID")
+		}
+	}
+	return boardID, nil
+}
+
 var betCallbackCommand = bots.NewCallbackCommand(
 	"bet",
 	func(whc bots.WebhookContext, callbackUrl *url.URL) (m bots.MessageFromBot, err error) {
@@ -33,19 +43,21 @@ var betCallbackCommand = bots.NewCallbackCommand(
 			return
 		}
 
-		if boardID == "" {
-			boardID = whc.Input().(bots.WebhookCallbackQuery).GetInlineMessageID()
-			if boardID == "" {
-				err = errors.New("expecting to get inlineMessageID")
-			}
+		if boardID, err = getBoardID(whc, boardID); err != nil {
+			return
 		}
+
 		userID := whc.AppUserStrID()
 
 		var rpsGame rpsmodels.RpsGame
 		var board turnbased.Board
 
+		var appUser bots.BotAppUser
+		appUser, err = whc.GetAppUser()
+		userEntity := appUser.(*rpsmodels.UserEntity)
+
 		if err = rpsdal.DB.RunInTransaction(c, func(tc context.Context) (err error) {
-			board, err = turnbased.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, move)
+			board, err = turnbased.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, userEntity.FullName(), move)
 			if err != nil {
 				if err == turnbased.ErrOldRound || err == turnbased.ErrUnknownRound {
 					log.Warningf(c, "%v: %v", err, round)

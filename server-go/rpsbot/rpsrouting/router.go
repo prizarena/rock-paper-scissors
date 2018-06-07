@@ -1,7 +1,6 @@
 package rpsrouting
 
 import (
-	"github.com/prizarena/bidding-tictactoe/server-go/btttbot/commands"
 	"github.com/strongo/bots-framework/core"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpsbot/rpscommands"
 )
@@ -12,15 +11,15 @@ var WebhooksRouter = bots.NewWebhookRouter(
 		//	commands.StartCommand,
 		//	commands.BidCommand,
 		//},
-		bots.WebhookInputChosenInlineResult: {
-			commands.ChosenInlineResultCommand,
-		},
-		bots.WebhookInputCallbackQuery: {
-			commands.NewGameCommand,
-			commands.HitCommand,
-			commands.CreateBoardCommand,
-			commands.StartLanguageSelectedCommand,
-		},
+		//bots.WebhookInputChosenInlineResult: {
+		//	commands.ChosenInlineResultCommand,
+		//},
+		//bots.WebhookInputCallbackQuery: {
+		//	commands.NewGameCommand,
+		//	commands.HitCommand,
+		//	commands.CreateBoardCommand,
+		//	commands.StartLanguageSelectedCommand,
+		//},
 	},
 	func() string { return "Oops..." },
 )

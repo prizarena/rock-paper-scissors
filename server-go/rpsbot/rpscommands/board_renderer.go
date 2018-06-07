@@ -42,7 +42,8 @@ func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator
 	default:
 		panic(fmt.Sprintf("len(game.UserMoves) > 2: %v", movesCount))
 	}
-	s.WriteString(fmt.Sprintf("\n\nLast updated: %v", time.Now()))
+	s.WriteString(fmt.Sprintf("\n\nLast update: <i>%v</i>\n\n", time.Now().Format("2006-01-02 15:04:05.000")))
+	s.WriteString(`<b>Sponsor</b>: <a href="https://t.me/DebtusBot?start=ref-playRockPaperScissorBot">@DebtusBot</a> - track your debts & assets`)
 	m.Text = s.String()
 	callbackPrefix := fmt.Sprintf("bet?l=%v&r=%v&", board.Lang, strconv.Itoa(board.Round))
 	if board.ID != "" {
@@ -68,7 +69,7 @@ func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator
 		},
 	)
 
-	if board.ID != "" && (board.BoardEntity == nil || board.LeftTournament.IsZero()) {
+	if board.ID == "" || board.BoardEntity == nil || board.LeftTournament.IsZero() {
 		keyboard.InlineKeyboard = append(keyboard.InlineKeyboard, []tgbotapi.InlineKeyboardButton{
 			{
 				Text:         "🚫 Leave tournament",

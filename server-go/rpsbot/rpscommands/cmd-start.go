@@ -3,23 +3,26 @@ package rpscommands
 import (
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-api-telegram"
+	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 )
 
 var startCommand = bots.Command{
-	Code: "start",
+	Code:     "start",
 	Commands: []string{"/start"},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
-		m.Text = "Rock - Paper - Scissors"
+		m.Text = whc.Translate(rpstrans.NewGameText)
+		m.Format = bots.MessageFormatHTML
+		m.DisableWebPagePreview = true
 		inlineQuery := ""
 		m.Keyboard = tgbotapi.NewInlineKeyboardMarkup(
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: "Challenge Telegram friend", SwitchInlineQuery: &inlineQuery},
+				{Text: whc.Translate(rpstrans.ChallengeFriendCommandText), SwitchInlineQuery: &inlineQuery},
 			},
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: "New tournament", CallbackData: "new-tournament"},
+				{Text: "⚔ New tournament", URL: "https://t.me/prizarena_bot?start=rock-paper-scissors"},
 			},
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: "Rules & How to play", CallbackData: "rules"},
+				{Text: "📜 Rules & How to play", URL: "https://prizarena.com/rock-paper-scissors/"},
 			},
 		)
 		return

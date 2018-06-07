@@ -14,8 +14,8 @@ var TRANS = map[string]map[string]string{
 		"ru-RU": "<b>Пожалуйста выберите язык общения</b>\nPlease select your language",
 	},
 	ChallengeFriendCommandText: {
-		"en-US": "⚔️ Challenge Telegram friend",
-		"ru-RU": "⚔️ Новая игра в Telegram",
+		"en-US": "🤺 Challenge Telegram friend",
+		"ru-RU": "🤺 Новая игра в Telegram",
 	},
 	Option1code: {
 		"en-US": "rock",
@@ -80,26 +80,22 @@ var TRANS = map[string]map[string]string{
 	NewGameText: {
 		"en-US": `<b>Rock-Paper-Scissors</b>
 <pre>
-  💎 Rock wins ✂.
+ 💎 Rock wins scissors ✂
 
-  📄 Paper wins (cover) 💎.
+ 📄 Paper wins rock 💎
 
-  ✂ Scissors win (cut) 📄.
+ ✂ Scissors win paper 📄
 </pre>
-
-
-<b>Sponsored:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtsTrackerBot</a>  - track your debts`,
+<b>Sponsor:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtusBot</a>  - track your debts`,
 		"ru-RU": `<b>Камень-Ножницы-Бумага</b>
 <pre>
-  💎 Камень побеждает ✂.
+ 💎 Камень побеждает ножницы ✂
 
-  ✂ Ножницы побеждают 📄.
+ ✂ Ножницы побеждают бумагу 📄
 
-  📄 Бумага побеждает 💎.
+ 📄 Бумага побеждает камень 💎
 </pre>
-Сделайте ваш выбор.
-
-<b>Промо:</b> <a href="https://t.me/DebtsTrackerRuBot?start=ref-playRockPaperScissorsBot">Бот для учёта долгов</a>`,
+<b>Спонсор:</b> <a href="https://t.me/DebtsTrackerRuBot?start=ref-playRockPaperScissorsBot">Бот для учёта долгов</a>`,
 	},
 	MT_WELCOME: {
 		"en-US": ``,
