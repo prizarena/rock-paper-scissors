@@ -19,10 +19,10 @@ var startCommand = bots.Command{
 				{Text: whc.Translate(rpstrans.ChallengeFriendCommandText), SwitchInlineQuery: &inlineQuery},
 			},
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: "⚔ New tournament", URL: "https://t.me/prizarena_bot?start=rock-paper-scissors"},
+				{Text: "⚔ New tournament", URL: "https://t.me/prizarena_bot?start=rockpaperscissors"},
 			},
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: "📜 Rules & How to play", URL: "https://prizarena.com/rock-paper-scissors/"},
+				{Text: "📜 Rules & How to play", URL: "https://prizarena.com/rockpaperscissors/"},
 			},
 		)
 		return
