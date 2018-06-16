@@ -12,9 +12,8 @@ import (
 	"github.com/pkg/errors"
 	"time"
 	"strconv"
-	"github.com/prizarena/prizarena-public/prizarena-client-go"
-	"github.com/prizarena/rock-paper-scissors/server-go/rpssecrets"
-	"github.com/prizarena/prizarena-public/prizarena-interfaces"
+			"github.com/prizarena/prizarena-public/prizarena-interfaces"
+	"github.com/prizarena/prizarena-public/pabot"
 )
 
 func getBoardID(whc bots.WebhookContext, boardID string) (string, error) {
@@ -77,8 +76,10 @@ var betCallbackCommand = bots.NewCallbackCommand(
 			return
 		}
 
+
 		httpClient := whc.BotContext().BotHost.GetHTTPClient(c)
-		prizarenaApiClient := prizarena.NewHttpApiClient(httpClient, "", rpssecrets.RpsPrizarenaGameID, rpssecrets.RpsPrizarenaToken)
+		prizarenaApiClient := pabot.NewPrizarenaApiClient(httpClient)
+
 		prizarenaApiClient.PlayCompleted(c, prizarena_interfaces.PlayCompletedPayload{
 			PlayID: "",
 			TournamentID: "", // empty for monthly tournament

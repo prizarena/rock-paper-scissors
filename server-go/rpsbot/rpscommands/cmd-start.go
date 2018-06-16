@@ -4,14 +4,14 @@ import (
 	"github.com/strongo/bots-framework/core"
 	"github.com/strongo/bots-api-telegram"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
-	"github.com/prizarena/prizarena-public/papbot"
+	"github.com/prizarena/prizarena-public/pabot"
 )
 
 var startCommand = bots.Command{
 	Code:     "start",
 	Commands: []string{"/start"},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
-		if m, err = papbot.OnStartIfTournamentLink(whc); m.Text != "" || err != nil {
+		if m, err = pabot.OnStartIfTournamentLink(whc); m.Text != "" || err != nil {
 			return
 		}
 		m.Text = whc.Translate(rpstrans.NewGameText)
