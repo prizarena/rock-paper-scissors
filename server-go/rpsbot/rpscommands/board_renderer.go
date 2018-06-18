@@ -48,6 +48,8 @@ func renderGameMessage(whc bots.WebhookContext, t strongo.SingleLocaleTranslator
 	callbackPrefix := fmt.Sprintf("bet?l=%v&r=%v&", board.Lang, strconv.Itoa(board.Round))
 	if board.ID != "" {
 		callbackPrefix += "b=" + url.QueryEscape(board.ID) + "&"
+	} else if board.TournamentID != "" {
+		callbackPrefix += "t=" + url.QueryEscape(board.TournamentID) + "&"
 	}
 
 	inlineQuery := ""
