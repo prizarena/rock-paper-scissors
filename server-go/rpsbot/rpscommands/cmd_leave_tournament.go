@@ -26,5 +26,5 @@ var leaveTournamentCommand = bots.NewCallbackCommand(turnbased.LeaveTournamentCo
 		return
 	}
 
-	return renderGameMessage(whc, whc, board)
+	return renderRpsBoardMessage(whc, nil, board)
 })

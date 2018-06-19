@@ -87,7 +87,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 				{UserID: userID, Points: 1},
 			},
 		})
-		if m, err = renderGameMessage(whc, whc, board); err != nil {
+		if m, err = renderRpsBoardMessage(whc, nil, board); err != nil {
 			return
 		}
 		return

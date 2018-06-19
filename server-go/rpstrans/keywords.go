@@ -5,6 +5,7 @@ const (
 	NewGameInlineTitle = "NewGameInlineTitle"
 	NewGameInlineDescription = "NewGameInlineDescription"
 	NewGameText = "NewGameText"
+	RulesShort = "RulesShort"
 	AskToMakeMove = "AskToMakeMove"
 	AskToMakeNextMove = "AskToMakeNextMove"
 	FirstMoveDoneAwaitingSecond = "FirstMoveDoneAwaitingSecond"

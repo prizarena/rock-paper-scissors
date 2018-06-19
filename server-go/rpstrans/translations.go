@@ -39,18 +39,18 @@ var TRANS = map[string]map[string]string{
 	},
 	Option2emoji: {
 		"en-US": "📄",
-		"ru-RU": "✂",
+		"ru-RU": "✂️",
 	},
 	Option3code: {
 		"en-US": "scissors",
 		"ru-RU": "paper",
 	},
 	Option3emoji: {
-		"en-US": "✂",
+		"en-US": "✂️",
 		"ru-RU": "📄",
 	},
 	Option3text: {
-		"en-US": "✂ Scissors",
+		"en-US": "✂️ Scissors",
 		"ru-RU": "📄 Бумага",
 	},
 	NewGameInlineTitle: {
@@ -62,8 +62,8 @@ var TRANS = map[string]map[string]string{
 		"ru-RU": "Создаст новую игру в Камень-Ножницы-Бумагу",
 	},
 	GameCardTitle: {
-		"en-US": "<b>💎Rock-📄Paper-✂Scissors</b>",
-		"ru-RU": "<b>💎Камень-✂Ножницы-📄Бумага</b>",
+		"en-US": "<b>💎Rock - 📄Paper - ✂️Scissors</b>",
+		"ru-RU": "<b>💎Камень - ✂️Ножницы - 📄Бумага</b>",
 	},
 	FirstMoveDoneAwaitingSecond: {
 		"en-US": "Player <b>%v</b> made choice, awaiting another player...",
@@ -77,24 +77,28 @@ var TRANS = map[string]map[string]string{
 		"en-US": "Please make your next choice.",
 		"ru-RU": "Сделайте ваш следующий выбор.",
 	},
-	NewGameText: {
-		"en-US": `<b>Rock-Paper-Scissors</b>
-<pre>
+	RulesShort: {
+		"en-US": `<pre>
  💎 Rock wins scissors ✂
 
  📄 Paper wins rock 💎
 
  ✂ Scissors win paper 📄
-</pre>
-<b>Sponsor:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtusBot</a>  - track your debts`,
-		"ru-RU": `<b>Камень-Ножницы-Бумага</b>
-<pre>
- 💎 Камень побеждает ножницы ✂
+</pre>`,
+		"ru-RU": `<pre>
+ 💎 Камень побеждает ножницы ✂️
 
  ✂ Ножницы побеждают бумагу 📄
 
  📄 Бумага побеждает камень 💎
-</pre>
+</pre>`,
+	},
+	NewGameText: {
+		"en-US": `<b>Rock-Paper-Scissors</b>
+%v
+<b>Sponsor:</b> <a href="https://t.me/DebtsTrackerBot?start=ref-playRockPaperScissorsBot">@DebtusBot</a>  - track your debts`,
+		"ru-RU": `<b>Камень-Ножницы-Бумага</b>
+%v
 <b>Спонсор:</b> <a href="https://t.me/DebtsTrackerRuBot?start=ref-playRockPaperScissorsBot">Бот для учёта долгов</a>`,
 	},
 	MT_WELCOME: {

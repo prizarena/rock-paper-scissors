@@ -15,7 +15,7 @@ var startCommand = bots.Command{
 		if m, err = pabot.OnStartIfTournamentLink(whc, rpssecrets.RpsPrizarenaGameID); m.Text != "" || err != nil {
 			return
 		}
-		m.Text = whc.Translate(rpstrans.NewGameText)
+		m.Text = whc.Translate(rpstrans.NewGameText, whc.Translate(rpstrans.RulesShort))
 		m.Format = bots.MessageFormatHTML
 		m.DisableWebPagePreview = true
 		inlineQuery := ""
