@@ -96,14 +96,14 @@ func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodel
 		// },
 	)
 
-	if board.ID != "" && board.BoardEntity != nil && board.LeftTournament.IsZero() {
-		keyboard.InlineKeyboard = append(keyboard.InlineKeyboard, []tgbotapi.InlineKeyboardButton{
-			{
-				Text:         "🚫 Leave tournament",
-				CallbackData: fmt.Sprintf("%v?board=%v", turnbased.LeaveTournamentCommandCode, board.ID),
-			},
-		})
-	}
+	//if board.ID != "" && board.BoardEntity != nil && board.LeftTournament.IsZero() {
+	//	keyboard.InlineKeyboard = append(keyboard.InlineKeyboard, []tgbotapi.InlineKeyboardButton{
+	//		{
+	//			Text:         "🚫 Leave tournament",
+	//			CallbackData: fmt.Sprintf("%v?board=%v", turnbased.LeaveTournamentCommandCode, board.ID),
+	//		},
+	//	})
+	//}
 
 	m.Keyboard = keyboard
 	return
