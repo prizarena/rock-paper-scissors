@@ -56,6 +56,7 @@ var chosenInlineResultCommand = bots.Command{
 				appUserEntity := botAppUser.(*rpsmodels.UserEntity)
 
 				board.BoardEntity = &turnbased.BoardEntity{
+					Round:        1,
 					TournamentID: tournament.ShortTournamentID(),
 					UserIDs:      []string{whc.AppUserStrID()},
 					UserNames:    []string{appUserEntity.FullName()},

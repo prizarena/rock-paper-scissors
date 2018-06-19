@@ -32,7 +32,11 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		c := whc.Context()
 		q := callbackUrl.Query()
 		lang := q.Get("l")
-		whc.SetLocale(lang)
+		if lang == "" {
+			lang = "en-US"
+		} else {
+			whc.SetLocale(lang)
+		}
 		boardID := q.Get("b")
 		move := q.Get("m")
 		var round int

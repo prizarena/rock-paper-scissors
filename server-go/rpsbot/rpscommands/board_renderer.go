@@ -6,18 +6,18 @@ import (
 	"bytes"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 	"fmt"
-	"time"
-	"strconv"
+		"strconv"
 	"net/url"
 	"github.com/strongo/bots-api-telegram"
 	"github.com/prizarena/turn-based"
 	"github.com/prizarena/prizarena-public/pamodels"
+	"time"
 )
 
 func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodels.Tournament, board turnbased.Board) (m bots.MessageFromBot, err error) {
 	if tournament != nil {
-		if board.TournamentID != "" && tournament.ID != "" && board.TournamentID != tournament.ID {
-			panic("board.ID != tournament.ID")
+		if board.TournamentID != "" && tournament.ID != "" && board.TournamentID != tournament.ShortTournamentID() {
+			panic(fmt.Sprintf("board.TournamentID != tournament.ShortTournamentID() => '%v' != '%v'", board.TournamentID, tournament.ShortTournamentID()))
 		}
 		if board.TournamentID == "" && tournament.ID != "" {
 			board.TournamentID = tournament.ShortTournamentID()
@@ -42,7 +42,7 @@ func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodel
 	switch {
 	case movesCount == 0: // not started
 		if len(board.UserNames) == 1 {
-			s.WriteString("<b>%v</b> invited to play.\n\n")
+			fmt.Fprintf(s, "<b>%v</b> invited to play.\n\n", board.UserNames[0])
 		}
 		s.WriteString(t.Translate(rpstrans.AskToMakeMove))
 	case movesCount == 1 || userMoves[0] == "" || userMoves[1] == "": // one player made move, waiting for second player
@@ -56,13 +56,20 @@ func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodel
 		s.WriteString("\n\n")
 		s.WriteString(fmt.Sprintf("Game completed, moves: %v v %v", userMoves[0], userMoves[1]))
 		s.WriteString("\n\n")
-		s.WriteString(t.Translate(rpstrans.AskToMakeMove))
+		fmt.Fprintf(s, "<b>%v</b>", t.Translate(rpstrans.AskToMakeMove))
 	default:
 		panic(fmt.Sprintf("len(game.UserMoves) > 2: %v", movesCount))
 	}
-	s.WriteString(fmt.Sprintf("\n\nLast update: <i>%v</i>\n\n", time.Now().Format("2006-01-02 15:04:05.000")))
-	s.WriteString(`<b>Sponsor</b>: <a href="https://t.me/DebtusBot?start=ref-playRockPaperScissorBot">@DebtusBot</a> - track your debts & assets`)
+
+	if board.ID != "" && board.UserMoves != "" {
+		s.WriteString(fmt.Sprintf("\n\nLast update: <i>%v</i>\n\n", time.Now().Format("2006-01-02 15:04:05.000")))
+		s.WriteString(`<b>Sponsor</b>: <a href="https://t.me/DebtusBot?start=ref-playRockPaperScissorBot">@DebtusBot</a> - track your debts & assets`)
+	}
+
 	m.Text = s.String()
+	if board.Lang == "" {
+		board.Lang = "en-US"
+	}
 	callbackPrefix := fmt.Sprintf("bet?l=%v&r=%v&", board.Lang, strconv.Itoa(board.Round))
 	if board.ID != "" {
 		callbackPrefix += "b=" + url.QueryEscape(board.ID) + "&"
