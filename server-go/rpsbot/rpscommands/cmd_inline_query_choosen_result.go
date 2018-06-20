@@ -16,7 +16,7 @@ import (
 )
 
 var chosenInlineResultCommand = bots.Command{
-	Code:       "inline-choosen-result",
+	Code:       "inline-chosen-result",
 	InputTypes: []bots.WebhookInputType{bots.WebhookInputChosenInlineResult},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
 		c := whc.Context()
