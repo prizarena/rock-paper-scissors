@@ -41,6 +41,30 @@ var TRANS = map[string]map[string]string{
 		"en-US": "Please make your next choice.",
 		"ru-RU": "Сделайте ваш следующий выбор.",
 	},
+	Option1code: {
+		"en-US": "rock",
+		"ru-RU": "rock",
+	},
+	Option1emoji: {
+		"en-US": "💎",
+		"ru-RU": "💎",
+	},
+	Option2code: {
+		"en-US": "paper",
+		"ru-RU": "scissors",
+	},
+	Option2emoji: {
+		"en-US": "📄",
+		"ru-RU": "✂️",
+	},
+	Option3code: {
+		"en-US": "scissors",
+		"ru-RU": "paper",
+	},
+	Option3emoji: {
+		"en-US": "✂️",
+		"ru-RU": "📄",
+	},
 	RulesShort: {
 		"en-US": `<pre>
  💎 Rock wins scissors ✂
