@@ -2,9 +2,8 @@ package rpsmodels
 
 import (
 	"github.com/strongo/db"
-	"github.com/strongo/app"
-	"time"
 	"github.com/strongo/bots-framework/core"
+	"github.com/strongo/app"
 )
 
 const UserKind = "User"
@@ -14,10 +13,6 @@ type User struct {
 	*UserEntity
 }
 
-type UserEntity struct {
-	strongo.AppUserBase
-	DtCreated time.Time
-}
-
+type UserEntity = strongo.AppUserBase
 
 var _ bots.BotAppUser = (*User)(nil)
