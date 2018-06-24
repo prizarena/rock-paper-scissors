@@ -18,10 +18,10 @@ func RegisterRpsCommands(router bots.WebhooksRouter) {
 		leaveTournamentCommand,
 	})
 
-	pabot.InitPrizarenaBot(router, func(httpClient *http.Client) prizarena_interfaces.ApiClient {
+	pabot.InitPrizarenaBot("rockpaperscissors", router, func(httpClient *http.Client) prizarena_interfaces.ApiClient {
 		if httpClient == nil {
 			panic("httpClient == nil")
 		}
-		return prizarena.NewHttpApiClient(httpClient, "", rpssecrets.RpsPrizarenaGameID, rpssecrets.RpsPrizarenaToken)
+		return prizarena.NewHttpApiClient(httpClient, "", rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken)
 	})
 }

@@ -19,7 +19,7 @@ var leaveTournamentCommand = bots.NewCallbackCommand(turnbased.LeaveTournamentCo
 
 	c := whc.Context()
 	err = rpsdal.DB.RunInTransaction(c, func(c context.Context) error {
-		err = turnbased.LeaveTournamentAction(whc, rpssecrets.RpsPrizarenaGameID, rpssecrets.RpsPrizarenaToken, rpsdal.DB, board)
+		err = turnbased.LeaveTournamentAction(whc, rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken, rpsdal.DB, board)
 		return nil
 	}, db.SingleGroupTransaction)
 	if err != nil {

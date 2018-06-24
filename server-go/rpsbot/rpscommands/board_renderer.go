@@ -35,7 +35,7 @@ func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodel
 	s.WriteString("\n" + t.Translate(rpstrans.RulesShort)+ "\n")
 
 	if board.BoardEntity == nil {
-		board.BoardEntity = &turnbased.BoardEntity{Round: 1}
+		board.BoardEntity = &turnbased.BoardEntity{BoardEntityBase: turnbased.BoardEntityBase{Round: 1}}
 	}
 	userMoves := board.UserMoves.Strings()
 	movesCount := len(userMoves)

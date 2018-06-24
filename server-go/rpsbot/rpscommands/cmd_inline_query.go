@@ -40,13 +40,13 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 func inlineQueryTournament(whc bots.WebhookContext, inlineQuery pabot.InlineQueryContext) (m bots.MessageFromBot, err error) {
 	c := whc.Context()
 	log.Debugf(c, "inlineQuery: %+v", inlineQuery)
-	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.RpsPrizarenaGameID, "id",
+	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, "id",
 		func(tournament pamodels.Tournament) (m bots.MessageFromBot, err error) {
 			if tournament.TournamentEntity == nil {
 				return
 			}
 			log.Debugf(c, "inlineQueryTournament => pabot.ProcessInlineQueryTournament => reply")
-			newBoard := turnbased.Board{BoardEntity: &turnbased.BoardEntity{Lang: "en-US", Round: 1}}
+			newBoard := turnbased.Board{BoardEntity: &turnbased.BoardEntity{BoardEntityBase: turnbased.BoardEntityBase{Lang: "en-US", Round: 1}}}
 			if m, err = renderRpsBoardMessage(whc, &tournament, newBoard); err != nil {
 				panic(err)
 			}
@@ -83,7 +83,7 @@ func inlineQueryTournament(whc bots.WebhookContext, inlineQuery pabot.InlineQuer
 }
 
 func inlineQueryPlay(whc bots.WebhookContext, inlineQuery pabot.InlineQueryContext) (m bots.MessageFromBot, err error) {
-	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.RpsPrizarenaGameID, "tournament",
+	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, "tournament",
 		func(tournament pamodels.Tournament) (m bots.MessageFromBot, err error) {
 			c := whc.Context()
 
@@ -91,7 +91,7 @@ func inlineQueryPlay(whc bots.WebhookContext, inlineQuery pabot.InlineQueryConte
 
 			newGameOption := func(lang string) tgbotapi.InlineQueryResultArticle {
 				t := strongo.NewSingleMapTranslator(strongo.LocalesByCode5[lang], translator)
-				newBoard := turnbased.Board{BoardEntity: &turnbased.BoardEntity{Lang: lang, Round: 1}}
+				newBoard := turnbased.Board{BoardEntity: &turnbased.BoardEntity{BoardEntityBase: turnbased.BoardEntityBase{Lang: "en-US", Round: 1}}}
 
 				// Renders game board to a Telegram message to return as inline result
 				if m, err = renderRpsBoardMessage(t, &tournament, newBoard); err != nil {

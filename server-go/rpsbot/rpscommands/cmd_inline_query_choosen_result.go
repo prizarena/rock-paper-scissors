@@ -30,7 +30,7 @@ var chosenInlineResultCommand = bots.Command{
 				return
 			}
 			if tournament.ID != "" {
-				tournament.ID = rpssecrets.RpsPrizarenaGameID + pamodels.TournamentIDSeparator + tournament.ID
+				tournament.ID = rpssecrets.PrizarenaGameID + pamodels.TournamentIDSeparator + tournament.ID
 				prizarenaCachedApi := pabot.NewCachedApi(whc)
 				if tournament, err = prizarenaCachedApi.GetTournamentByID(c, tournament.ID); err != nil {
 					return
@@ -56,11 +56,13 @@ var chosenInlineResultCommand = bots.Command{
 				appUserEntity := botAppUser.(*rpsmodels.UserEntity)
 
 				board.BoardEntity = &turnbased.BoardEntity{
-					Round:        1,
-					TournamentID: tournament.ShortTournamentID(),
-					UserIDs:      []string{whc.AppUserStrID()},
-					UserNames:    []string{appUserEntity.FullName()},
-					Created:      time.Now(),
+					BoardEntityBase: turnbased.BoardEntityBase{
+						Round:        1,
+						TournamentID: tournament.ShortTournamentID(),
+						UserIDs:      []string{whc.AppUserStrID()},
+						UserNames:    []string{appUserEntity.FullName()},
+						Created:      time.Now(),
+					},
 				}
 				m, err = renderRpsBoardMessage(whc, &tournament, board)
 				return

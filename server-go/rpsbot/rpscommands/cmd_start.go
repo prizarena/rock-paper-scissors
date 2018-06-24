@@ -12,7 +12,7 @@ var startCommand = bots.Command{
 	Code:     "start",
 	Commands: []string{"/start"},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
-		if m, err = pabot.OnStartIfTournamentLink(whc, rpssecrets.RpsPrizarenaGameID); m.Text != "" || err != nil {
+		if m, err = pabot.OnStartIfTournamentLink(whc, rpssecrets.PrizarenaGameID); m.Text != "" || err != nil {
 			return
 		}
 		m.Text = whc.Translate(rpstrans.NewGameText, whc.Translate(rpstrans.RulesShort))
@@ -23,9 +23,7 @@ var startCommand = bots.Command{
 			[]tgbotapi.InlineKeyboardButton{
 				{Text: whc.Translate(rpstrans.ChallengeFriendCommandText), SwitchInlineQuery: &inlineQuery},
 			},
-			[]tgbotapi.InlineKeyboardButton{
-				{Text: "⚔ New tournament", URL: "https://t.me/prizarena_bot?start=rockpaperscissors"},
-			},
+			pabot.NewTournamentTelegramInlineButton(whc, "rockpaperscissors"),
 			[]tgbotapi.InlineKeyboardButton{
 				{Text: "📜 Rules & How to play", URL: "https://prizarena.com/rockpaperscissors/"},
 			},
