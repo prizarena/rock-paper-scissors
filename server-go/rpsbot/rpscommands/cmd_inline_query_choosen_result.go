@@ -31,7 +31,7 @@ var chosenInlineResultCommand = bots.Command{
 			}
 			if tournament.ID != "" {
 				tournament.ID = rpssecrets.PrizarenaGameID + pamodels.TournamentIDSeparator + tournament.ID
-				prizarenaCachedApi := pabot.NewCachedApi(whc)
+				prizarenaCachedApi := pabot.NewCachedApi(c, rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken)
 				if tournament, err = prizarenaCachedApi.GetTournamentByID(c, tournament.ID); err != nil {
 					return
 				}

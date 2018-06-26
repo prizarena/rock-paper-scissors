@@ -12,7 +12,7 @@ var startCommand = bots.Command{
 	Code:     "start",
 	Commands: []string{"/start"},
 	Action: func(whc bots.WebhookContext) (m bots.MessageFromBot, err error) {
-		if m, err = pabot.OnStartIfTournamentLink(whc, rpssecrets.PrizarenaGameID); m.Text != "" || err != nil {
+		if m, err = pabot.OnStartIfTournamentLink(whc, rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken); m.Text != "" || err != nil {
 			return
 		}
 		m.Text = whc.Translate(rpstrans.NewGameText, whc.Translate(rpstrans.RulesShort))

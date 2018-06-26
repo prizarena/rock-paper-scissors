@@ -40,7 +40,7 @@ var inlineQueryCommand = bots.NewInlineQueryCommand(
 func inlineQueryTournament(whc bots.WebhookContext, inlineQuery pabot.InlineQueryContext) (m bots.MessageFromBot, err error) {
 	c := whc.Context()
 	log.Debugf(c, "inlineQuery: %+v", inlineQuery)
-	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, "id",
+	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken, "id",
 		func(tournament pamodels.Tournament) (m bots.MessageFromBot, err error) {
 			if tournament.TournamentEntity == nil {
 				return
@@ -83,7 +83,7 @@ func inlineQueryTournament(whc bots.WebhookContext, inlineQuery pabot.InlineQuer
 }
 
 func inlineQueryPlay(whc bots.WebhookContext, inlineQuery pabot.InlineQueryContext) (m bots.MessageFromBot, err error) {
-	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, "tournament",
+	return pabot.ProcessInlineQueryTournament(whc, inlineQuery, rpssecrets.PrizarenaGameID, rpssecrets.PrizarenaToken, "tournament",
 		func(tournament pamodels.Tournament) (m bots.MessageFromBot, err error) {
 			c := whc.Context()
 
