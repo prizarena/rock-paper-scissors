@@ -16,16 +16,6 @@ import (
 	"github.com/prizarena/prizarena-public/pabot"
 )
 
-func getBoardID(whc bots.WebhookContext, boardID string) (string, error) {
-	if boardID == "" {
-		boardID = whc.Input().(bots.WebhookCallbackQuery).GetInlineMessageID()
-		if boardID == "" {
-			return "", errors.New("expecting to get inlineMessageID")
-		}
-	}
-	return boardID, nil
-}
-
 var betCallbackCommand = bots.NewCallbackCommand(
 	"bet",
 	func(whc bots.WebhookContext, callbackUrl *url.URL) (m bots.MessageFromBot, err error) {
@@ -37,7 +27,6 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		} else {
 			whc.SetLocale(lang)
 		}
-		boardID := q.Get("b")
 		move := q.Get("m")
 		var round int
 		round, err = strconv.Atoi(q.Get("r"))
@@ -46,7 +35,8 @@ var betCallbackCommand = bots.NewCallbackCommand(
 			return
 		}
 
-		if boardID, err = getBoardID(whc, boardID); err != nil {
+		boardID := q.Get("b")
+		if boardID, err = turnbased.GetBoardID(whc.Input(), boardID); err != nil {
 			return
 		}
 

@@ -13,7 +13,7 @@ import (
 var leaveTournamentCommand = bots.NewCallbackCommand(turnbased.LeaveTournamentCommandCode, func(whc bots.WebhookContext, callbackUrl *url.URL) (m bots.MessageFromBot, err error) {
 	var board turnbased.Board
 	board.ID = callbackUrl.Query().Get("board")
-	if board.ID, err = getBoardID(whc, board.ID); err != nil {
+	if board.ID, err = turnbased.GetBoardID(whc.Input(), board.ID); err != nil {
 		return
 	}
 
