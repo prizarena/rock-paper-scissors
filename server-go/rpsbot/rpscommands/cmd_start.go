@@ -6,6 +6,7 @@ import (
 	"github.com/prizarena/rock-paper-scissors/server-go/rpstrans"
 	"github.com/prizarena/prizarena-public/pabot"
 	"github.com/prizarena/rock-paper-scissors/server-go/rpssecrets"
+	"github.com/prizarena/prizarena-public/patrans"
 )
 
 var startCommand = bots.Command{
@@ -21,7 +22,7 @@ var startCommand = bots.Command{
 		inlineQuery := ""
 		m.Keyboard = tgbotapi.NewInlineKeyboardMarkup(
 			[]tgbotapi.InlineKeyboardButton{
-				{Text: whc.Translate(rpstrans.ChallengeFriendCommandText), SwitchInlineQuery: &inlineQuery},
+				{Text: whc.Translate(patrans.ChallengeFriendCommandText), SwitchInlineQuery: &inlineQuery},
 			},
 			pabot.NewTournamentTelegramInlineButton(whc, "rockpaperscissors"),
 			[]tgbotapi.InlineKeyboardButton{

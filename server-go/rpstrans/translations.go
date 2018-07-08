@@ -13,10 +13,6 @@ var TRANS = map[string]map[string]string{
 		"en-US": "<b>Please select your language</b>\nПожалуйста выберите язык общения",
 		"ru-RU": "<b>Пожалуйста выберите язык общения</b>\nPlease select your language",
 	},
-	ChallengeFriendCommandText: {
-		"en-US": "🤺 Challenge Telegram friend",
-		"ru-RU": "🤺 Новая игра в Telegram",
-	},
 	NewGameInlineTitle: {
 		"en-US": "New game",
 		"ru-RU": "Новая игра",

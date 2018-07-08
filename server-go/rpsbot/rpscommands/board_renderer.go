@@ -96,7 +96,7 @@ func renderRpsBoardMessage(t strongo.SingleLocaleTranslator, tournament *pamodel
 		// },
 	)
 
-	//if board.ID != "" && board.BoardEntity != nil && board.TournamentLeft.IsZero() {
+	//if board.ID != "" && board.RevBoardEntity != nil && board.TournamentLeft.IsZero() {
 	//	keyboard.InlineKeyboard = append(keyboard.InlineKeyboard, []tgbotapi.InlineKeyboardButton{
 	//		{
 	//			Text:         "🚫 Leave tournament",
