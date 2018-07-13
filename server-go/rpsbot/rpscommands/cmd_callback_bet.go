@@ -49,7 +49,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		userEntity := appUser.(*rpsmodels.UserEntity)
 
 		if err = rpsdal.DB.RunInTransaction(c, func(tc context.Context) (err error) {
-			board, err = turnbased.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, userEntity.FullName(), move)
+			board, err = turnbased.MakeMove(tc, time.Now(), rpsdal.DB, round, lang, boardID, userID, userEntity.GetFullName(), move)
 			if err != nil {
 				if err == turnbased.ErrOldRound || err == turnbased.ErrUnknownRound {
 					log.Warningf(c, "%v: %v", err, round)
@@ -62,7 +62,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 			if len(userMoves) == 2 && userMoves[0] != "" && userMoves[1] != "" {
 				turnbased.NextRound(board)
 			}
-			if err = rpsdal.DB.Update(tc, &board); err != nil {
+			if err  = rpsdal.DB.Update(tc, &board); err != nil {
 				return
 			}
 			return

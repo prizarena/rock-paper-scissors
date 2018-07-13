@@ -60,7 +60,7 @@ var chosenInlineResultCommand = bots.Command{
 						Round:        1,
 						TournamentID: tournament.ShortTournamentID(),
 						UserIDs:      []string{whc.AppUserStrID()},
-						UserNames:    []string{appUserEntity.FullName()},
+						UserNames:    []string{appUserEntity.GetFullName()},
 						Created:      time.Now(),
 					},
 				}
