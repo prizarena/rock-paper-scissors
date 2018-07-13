@@ -71,8 +71,7 @@ var betCallbackCommand = bots.NewCallbackCommand(
 		}
 
 
-		httpClient := whc.BotContext().BotHost.GetHTTPClient(c)
-		prizarenaApiClient := pabot.NewPrizarenaApiClient(httpClient)
+		prizarenaApiClient := pabot.GetPrizarenaApiClient(c)
 
 		prizarenaApiClient.PlayCompleted(c, prizarena_interfaces.PlayCompletedPayload{
 			PlayID: "",
